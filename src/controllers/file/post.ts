@@ -20,5 +20,5 @@ export default (req : Request, res : Response) => {
 
   redis.client.publish('file:new', JSON.stringify(file));
 
-  res.end();
+  res.send('See console for next URL').end();
 };
