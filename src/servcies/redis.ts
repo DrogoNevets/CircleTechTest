@@ -39,22 +39,23 @@ class RedisService {
     const msg = JSON.parse(message);
 
     // do file conversion
-    // email user saying file is ready
-
+    
     const curr = await this.client.get(msg.filename);
-
+    
     if(!curr) {
       throw new Error('File not found');
     }
-
+    
     const details = {
       ...JSON.parse(curr),
       file: 'https://archronos.com/wp-content/uploads/2024/07/dummy.txt'
     };
-
+    
     await this.client.set(msg.filename, JSON.stringify(details));
     console.debug(`now vist the following URL: GET:: http://localhost:8080/file/${msg.filename}`);
-
+    
+    // email user saying file is ready
+    
     unlinkSync(msg.path);
   }
 
