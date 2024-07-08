@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  
+  redis:
+    image: redis:6.2-alpine
+    restart: unless-stopped
+    ports:
+      - '${REDIS_PORT:-18081}:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass password
+    volumes: 
+      - cache:/data
+    networks:
+      - tech-test
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "password", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+      
+volumes:
+  cache:
+
+networks:
+  tech-test:
