@@ -6,6 +6,8 @@ type ReqParams = {
   convertedFile : string;
 }
 
+const aDay = 60 * 60 * 24;
+
 export default async (req : Request, res : Response) => {
   const { convertedFile } = req.params as ReqParams;
 
@@ -19,5 +21,6 @@ export default async (req : Request, res : Response) => {
 
   res.redirect(details?.file);
 
-  redis.client.del(convertedFile);
+  // auto delete after 24hrs
+  redis.client.expire(convertedFile, aDay);
 };
