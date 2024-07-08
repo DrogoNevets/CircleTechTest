@@ -1,0 +1,9 @@
+VPC
+  Load balancer
+  Public subnet
+    Bastion
+  Private subnet  
+    confluence node
+    amazon efs
+    RDS
+      postgres
