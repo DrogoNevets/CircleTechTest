@@ -7,6 +7,6 @@ const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 
 router.get('/:convertedFile', get);
-router.post('/', upload.single('toTransfer'), post);
+router.post('/', upload.single('toConvert'), post);
 
 export default router;
